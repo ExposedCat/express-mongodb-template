@@ -1,17 +1,22 @@
-import express from 'express'
+import express, { Express } from 'express'
 
 import { setMiddlewares } from '../middlewares/set.js'
 import { setHandlers } from '../controllers/set.js'
 
-function initServer(sessionSecret: string) {
-	const app = express()
+function runServer(server: Express, port: number): Promise<void> {
+	// Promisify listener
+	return new Promise(resolve => server.listen(port, () => resolve()))
+}
 
-	setMiddlewares(app, sessionSecret)
-	setHandlers(app)
+function initServer(sessionSecret: string) {
+	const server = express()
+
+	setMiddlewares(server, sessionSecret)
+	setHandlers(server)
 
 	return {
-		server: app,
-		runServer: (port: number) => app.listen(port)
+		server,
+		runServer: (port: number) => runServer(server, port)
 	}
 }
 

@@ -21,12 +21,7 @@ async function initApp() {
 		process.env.SESSION_SECRET as string
 	)
 
-	// TODO: Do not start in init file
-	// Start entities
-	await connectToDatabase()
-	runServer(Number(process.env.PORT))
-
-	return server
+	return { server, connectToDatabase, runServer }
 }
 
 export { initApp }

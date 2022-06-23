@@ -14,7 +14,10 @@ import {
 process.env.NODE_ENV = 'test'
 chai.use(chaiHttp)
 
-const server = await initApp()
+const { server, connectToDatabase, runServer } = await initApp()
+await connectToDatabase()
+await runServer(Number(process.env.PORT))
+
 const FakeDataFactory = initFakeDataFactory()
 
 const database = { User }
