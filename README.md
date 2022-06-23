@@ -60,7 +60,8 @@ cd express-mongodb-template
 
 ```bash
 docker build -t express-mongodb-api .
-```  
+```
+
 5.
 
 -   Start app (map local port 3000 to the same in container):
