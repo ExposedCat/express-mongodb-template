@@ -1,5 +1,5 @@
 import Chance from 'chance'
-import { generateJWT } from '../../src/helpers/generate-jwt.js'
+import { generateJwt } from '../../build/helpers/index.js'
 
 function user(chance, password, options = {}) {
 	let userData = {}
@@ -18,7 +18,7 @@ function initFakeDataFactory() {
 	const password = length => chance.string({ length })
 	const string = () => chance.string()
 	const number = () => chance.integer()
-	const jwt = userId => generateJWT({ data: { userId } })
+	const jwt = userId => generateJwt({ data: { userId } })
 	return {
 		email,
 		password,
