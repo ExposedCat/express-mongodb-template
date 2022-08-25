@@ -1,5 +1,5 @@
 export { validateEnv } from './validate-env.js'
-export { path } from './resolve-path.js'
+export { resolvePath } from './resolve-path.js'
 export { readJsonFile } from './read-json-file.js'
 export { encrypt, compare } from './crypto.js'
 export {

@@ -9,9 +9,7 @@ function validateEnv() {
 		if (env in process.env) {
 			continue
 		}
-		// TODO: Throw error
-		console.error(`Error: Environment variable "${env}" is not defined`)
-		process.exit()
+		throw new Error(`Error: Environment variable "${env}" is not defined`)
 	}
 }
 

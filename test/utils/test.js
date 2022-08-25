@@ -1,4 +1,15 @@
-function test(chai, server, { title, method, beforeTest, data }, testFunction) {
+function test(
+	chai,
+	server,
+	{
+		title,
+		method,
+		requestMethod = 'post',
+		beforeTest = async () => ({}),
+		data = null
+	},
+	testFunction
+) {
 	it(title, async () => {
 		let auth = ''
 		let pass = {}
@@ -16,7 +27,7 @@ function test(chai, server, { title, method, beforeTest, data }, testFunction) {
 		}
 		const res = await chai
 			.request(server)
-			.post(`/api/${method}`)
+			[requestMethod](`/api/${method}`)
 			.set('Authorization', auth)
 			.send(data)
 
@@ -42,4 +53,4 @@ function testAnyData(chai, server, testData) {
 	test(chai, server, testData, testData.test)
 }
 
-export { testInvalidData, testAnyData as testData, testUnauthorized }
+export { testInvalidData, testAnyData as testData, testUnauthorized, test }

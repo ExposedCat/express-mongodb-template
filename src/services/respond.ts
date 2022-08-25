@@ -108,6 +108,7 @@ function formResponse(type: ResultType, name: ResponseName, data = {}) {
 			[ResponseName.Root]: success(
 				'Welcome here. Check docs for instructions how to use this API. Use current URL as main API endpoint'
 			),
+			[ResponseName.Private]: success('Authorization state: authorized'),
 			[ResponseName.ContactAdded]: success('Contact successfully added')
 		}
 	}

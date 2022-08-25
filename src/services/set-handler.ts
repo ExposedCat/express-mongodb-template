@@ -1,13 +1,5 @@
-// TODO: Move to server configuration
 import { HandlerData, HandlerType } from '../types/index.js'
 import { Express, RequestHandler } from 'express'
-import {
-	rootControllerData,
-	unknownErrorControllerData,
-	pageNotFoundControllerData,
-	registerControllerData,
-	loginControllerData
-} from '../controllers/index.js'
 
 function setHandler(app: Express, handlerData: HandlerData) {
 	if (handlerData.method === HandlerType.Middleware) {
@@ -25,13 +17,4 @@ function setHandler(app: Express, handlerData: HandlerData) {
 	}
 }
 
-function setHandlers(app: Express) {
-	setHandler(app, rootControllerData)
-	setHandler(app, loginControllerData)
-	setHandler(app, registerControllerData)
-
-	setHandler(app, pageNotFoundControllerData)
-	setHandler(app, unknownErrorControllerData)
-}
-
-export { setHandlers }
+export { setHandler }

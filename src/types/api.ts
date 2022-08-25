@@ -26,6 +26,7 @@ enum ResponseName {
 	SignedIn = 'signedIn',
 	SignedUp = 'signedUp',
 	Root = 'root',
+	Private = 'private',
 	ContactAdded = 'contactAdded'
 }
 

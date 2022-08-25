@@ -1,27 +1,11 @@
-import { config as setEnvFile } from 'dotenv'
-
-import { initServer, initDatabase } from './index.js'
-import { validateEnv, path } from '../helpers/index.js'
+import { initServer, initDatabase, prepareEnvironment } from './index.js'
 
 async function initApp() {
-	const testMode = process.env.NODE_ENV === 'test'
-
 	// Load and validate environment variables
-	// TODO: Move to separate configuration
-	const configName = `../../.env${testMode ? '-test' : ''}`
-	setEnvFile({
-		path: path(import.meta.url, configName)
-	})
-	// TODO: Process error
-	validateEnv() // Will raise an error
+	prepareEnvironment()
 
-	// Init entities
-	const connectToDatabase = initDatabase(
-		process.env.DB_CONNECTION_STRING as string
-	)
-	const { runServer, server } = initServer(
-		process.env.SESSION_SECRET as string
-	)
+	let connectToDatabase = initDatabase()
+	const { server, runServer } = initServer()
 
 	return { server, connectToDatabase, runServer }
 }

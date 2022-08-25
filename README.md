@@ -166,7 +166,7 @@ cd express-mongodb-template
     <h2>🐛 Testing</h2>
 </div>
 
-1. Create copy of `.env-example` called `.env-test` and replace example data with your test data
+1. Create copy of `.env.example` called `.env.test` and replace example data with your test data
 2. Run tests:
 
 ```bash

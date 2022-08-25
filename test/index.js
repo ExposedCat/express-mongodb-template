@@ -7,6 +7,7 @@ import { initFakeDataFactory } from './utils/index.js'
 
 import {
 	testRootEndpoint,
+	testPrivateEndpoint,
 	testRegisterEndpoints,
 	testLoginEndpoints
 } from './api/index.js'
@@ -23,5 +24,6 @@ const FakeDataFactory = initFakeDataFactory()
 const database = { User }
 
 testRootEndpoint(server, chai)
+testPrivateEndpoint(server, database, chai, FakeDataFactory)
 testRegisterEndpoints(server, database, chai, FakeDataFactory)
 testLoginEndpoints(server, database, chai, FakeDataFactory)

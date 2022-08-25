@@ -1,18 +1,42 @@
 import express, { Express } from 'express'
-
-import { setMiddlewares } from '../middlewares/set.js'
-import { setHandlers } from '../controllers/set.js'
+import session from 'express-session'
+import helmet, { HelmetOptions } from 'helmet'
+import * as controllers from '../controllers/index.js'
+import { setHandler } from '../services/index.js'
 
 function runServer(server: Express, port: number): Promise<void> {
 	// Promisify listener
 	return new Promise(resolve => server.listen(port, () => resolve()))
 }
 
-function initServer(sessionSecret: string) {
+function setMiddlewares(app: Express) {
+	// Security headers
+	const helmetOptions = {
+		referrerPolicy: 'strict-origin-when-cross-origin'
+	} as HelmetOptions
+	app.use(helmet(helmetOptions))
+
+	app.use(
+		session({
+			secret: process.env.SESSION_SECRET,
+			resave: true,
+			saveUninitialized: true
+		})
+	)
+	app.use(express.json())
+	app.use(express.urlencoded({ extended: true }))
+}
+
+function initServer() {
 	const server = express()
 
-	setMiddlewares(server, sessionSecret)
-	setHandlers(server)
+	setMiddlewares(server)
+	setHandler(server, controllers.root)
+	setHandler(server, controllers.private)
+	setHandler(server, controllers.login)
+	setHandler(server, controllers.register)
+	setHandler(server, controllers.pageNotFound)
+	setHandler(server, controllers.unknownError)
 
 	return {
 		server,

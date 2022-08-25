@@ -1,28 +1,20 @@
 import mongoose, { ConnectOptions } from 'mongoose'
 
-async function connect(connectionString: string) {
+async function connectToDatabase() {
 	const connectionOptions = {
 		useNewUrlParser: true,
 		useUnifiedTopology: true
 	}
-	try {
-		await mongoose.connect(
-			connectionString,
-			connectionOptions as ConnectOptions
-		)
-	} catch (error) {
-		// TODO: Throw error
-		console.error('[Database] Can not connect:')
-		console.trace(error)
-		process.exit(2)
-	}
+	const db = await mongoose.connect(
+		process.env.DB_CONNECTION_STRING,
+		connectionOptions as ConnectOptions
+	)
+	return db
 }
 
-function initDatabase(connectionString: string) {
+function initDatabase() {
 	mongoose.Promise = global.Promise
-	// TODO: Use createFunc instead of bind
-	const connector = connect.bind(null, connectionString)
-	return connector
+	return connectToDatabase
 }
 
 export { initDatabase }

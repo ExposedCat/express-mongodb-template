@@ -1,17 +1,5 @@
+import { JsonFileContents } from '../types/index.js'
 import fs from 'fs/promises'
-
-// TODO: Move to types directory
-interface ValidFileContents {
-	error: false
-	data: object
-}
-
-interface InvalidFileContents {
-	error: true
-	data: null
-}
-
-type JsonFileContents = ValidFileContents | InvalidFileContents
 
 async function readJsonFile(path: string): Promise<JsonFileContents> {
 	try {
