@@ -7,10 +7,12 @@ async function initApp() {
 	const testMode = process.env.NODE_ENV === 'test'
 
 	// Load and validate environment variables
+	// TODO: Move to separate configuration
 	const configName = `../../.env${testMode ? '-test' : ''}`
 	setEnvFile({
 		path: path(import.meta.url, configName)
 	})
+	// TODO: Process error
 	validateEnv() // Will raise an error
 
 	// Init entities

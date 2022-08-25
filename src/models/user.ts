@@ -1,3 +1,5 @@
+import typegoose from '@typegoose/typegoose'
+const { getModelForClass, prop } = typegoose
 import {
 	getUserById,
 	getUserByEmail,
@@ -7,8 +9,6 @@ import {
 	loginUser,
 	registerUser
 } from '../database-services/index.js'
-import typegoose from '@typegoose/typegoose'
-const { getModelForClass, prop } = typegoose
 
 class ModelDefinition {
 	@prop({ unique: true, required: true })

@@ -11,6 +11,7 @@ async function connect(connectionString: string) {
 			connectionOptions as ConnectOptions
 		)
 	} catch (error) {
+		// TODO: Throw error
 		console.error('[Database] Can not connect:')
 		console.trace(error)
 		process.exit(2)
@@ -19,6 +20,7 @@ async function connect(connectionString: string) {
 
 function initDatabase(connectionString: string) {
 	mongoose.Promise = global.Promise
+	// TODO: Use createFunc instead of bind
 	const connector = connect.bind(null, connectionString)
 	return connector
 }

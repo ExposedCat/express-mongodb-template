@@ -1,6 +1,14 @@
-import { UserValidationField, ResponseName, ResultType } from '../types/index.js'
+import {
+	UserValidationField,
+	ResponseName,
+	ResultType
+} from '../types/index.js'
 import { Request, Response, NextFunction } from 'express'
-import { validateFields, isValidEmail, isValidPassword } from '../helpers/index.js'
+import {
+	validateFields,
+	isValidEmail,
+	isValidPassword
+} from '../helpers/index.js'
 import { respond } from '../services/index.js'
 
 function validateUserData(req: Request, res: Response, next: NextFunction) {

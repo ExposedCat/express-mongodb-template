@@ -7,6 +7,7 @@ async function registerUser(
 ): Promise<ServiceResponse> {
 	const userExists = await this.checkExists(email)
 	if (userExists) {
+		// TODO: Use response generation function
 		return {
 			isError: true,
 			data: {

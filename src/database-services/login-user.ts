@@ -8,6 +8,7 @@ async function loginUser(
 ): Promise<ServiceResponse> {
 	const { isCorrect, userId } = await this.correctCredentials(email, password)
 	if (!isCorrect) {
+		// TODO: Use response generation function
 		return {
 			isError: true,
 			data: {

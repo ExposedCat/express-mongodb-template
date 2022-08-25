@@ -1,6 +1,7 @@
-import { sign } from 'async-jsonwebtoken'
 import { JwtUserData } from '../types/index.js'
+import { sign } from 'async-jsonwebtoken'
 
+// TODO: Move to types directory
 interface ValidJWT {
 	error: false
 	token: string
@@ -22,6 +23,7 @@ async function generateJwt(data: JwtUserData, expiresIn = '15m'): Promise<JWT> {
 		options
 	)
 	if (error || token == null) {
+		// TODO: Use response generation function
 		return {
 			error: true,
 			token: null

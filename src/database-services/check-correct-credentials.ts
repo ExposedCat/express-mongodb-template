@@ -7,7 +7,9 @@ async function correctCredentials(
 	password: string
 ): Promise<CredentialsValidaton> {
 	const user = await this.getByEmail(email)
+	// TODO: Use response generation function
 	if (!user) {
+		// TODO: Respond with error
 		return { isCorrect: false, userId: null }
 	}
 	const isCorrect = await compare(password, user.password)
